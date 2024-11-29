@@ -1,0 +1,4 @@
+docker run -d \
+  --name gns3-server \
+  -p 3080:3080 \
+  custom-gns3-server
