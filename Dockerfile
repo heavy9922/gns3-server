@@ -19,10 +19,13 @@ RUN apt-get update && apt-get install -y \
 # Establecer zona horaria
 RUN ln -fs /usr/share/zoneinfo/Etc/UTC /etc/localtime && dpkg-reconfigure --frontend noninteractive tzdata
 
+# Instalar dependencias adicionales para Python 3.8
+RUN pip3 install --upgrade pip setuptools wheel \
+    && pip3 install importlib_resources
+
 # Clonar y configurar el servidor GNS3
 RUN git clone https://github.com/GNS3/gns3-server.git /opt/gns3-server \
     && cd /opt/gns3-server \
-    && pip3 install --upgrade pip setuptools wheel \
     && pip3 install -r requirements.txt \
     && python3 setup.py install \
     && pip3 install .
